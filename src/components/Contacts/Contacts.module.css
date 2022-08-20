@@ -1,0 +1,68 @@
+.container {
+  width: 350px;
+  height: calc(100vh - 120px);
+  padding: 15px 10px 0px;
+  border-right: 0.5px solid rgb(230, 227, 227);
+}
+
+.header {
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 25px;
+}
+
+.contacts {
+  display: flex;
+  flex-direction: column;
+}
+.contact {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 35px;
+  cursor: pointer;
+  border-bottom: 0.5px solid rgb(230, 227, 227);
+}
+
+.avatarBlock {
+  display: flex;
+  align-items: center;
+}
+.avatar {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.username {
+  font-size: 16px;
+  font-weight: 500;
+
+  margin-bottom: 0;
+}
+
+.block {
+  display: flex;
+}
+
+.date {
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.message {
+  font-size: 12px;
+  font-weight: 400;
+  width: 200px;
+
+  margin-top: 0;
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.textBlock {
+  margin-left: 10px;
+}

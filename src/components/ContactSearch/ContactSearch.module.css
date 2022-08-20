@@ -1,0 +1,32 @@
+.label {
+  position: relative;
+  display: block;
+}
+.input {
+  width: calc(100% - 40px);
+  height: 25px;
+  padding-left: 30px;
+  padding-right: 10px;
+  border-radius: 25px;
+  border: 1px solid rgba(33, 33, 33, 0.2);
+  transition: border-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.input:focus {
+  outline: none;
+  border-color: rgb(152, 161, 245);
+}
+
+.icon {
+  position: absolute;
+  top: 50%;
+  left: 12px;
+  transform: translateY(-50%);
+  display: block;
+  fill: #01010142;
+  transition: fill 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.input:focus + .icon {
+  fill: rgb(152, 161, 245);
+}
