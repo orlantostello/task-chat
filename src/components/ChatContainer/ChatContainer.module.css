@@ -4,18 +4,35 @@
 }
 
 .header {
+  display: flex;
   height: 50px;
   background-color: rgb(233, 232, 232);
-}
-
-.message {
-  height: calc(100% - 140px);
-  /* height: 450px; */
+  padding: 10px 10px;
 }
 
 .inputContainer {
   height: 55px;
-  padding-top: 20px;
+  padding-top: 10px;
   padding-bottom: 10px;
   background-color: rgb(233, 232, 232);
+}
+
+.chatBox {
+  height: calc(100% - 105px);
+  overflow-y: scroll;
+  padding-right: 10px;
+  padding-left: 10px;
+}
+
+.contactImg {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 10px;
+}
+
+.name {
+  font-size: 16px;
+  font-weight: 500;
 }

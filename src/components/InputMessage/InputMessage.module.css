@@ -25,7 +25,7 @@
 .btn {
   position: absolute;
   top: 50%;
-  right: 25px;
+  right: 45px;
   transform: translateY(-50%);
   display: flex;
   align-items: center;
