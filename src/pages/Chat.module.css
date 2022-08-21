@@ -1,3 +1,13 @@
 .container {
   display: flex;
 }
+
+.chatContainer {
+  text-align: center;
+}
+
+.text {
+  display: block;
+  font-size: 22px;
+  font-weight: 400;
+}

@@ -1,6 +1,12 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import s from './Contacts.module.css';
 import contacts from '../../utils/dataContacts';
+
+const linkStyle = {
+  textDecoration: 'none',
+  color: '#000',
+};
 
 const Contacts = () => {
   return (
@@ -8,21 +14,23 @@ const Contacts = () => {
       <h2 className={s.header}>Chats</h2>
 
       <ul className={s.contacts}>
-        {contacts.map(({ name, id, avatar, date, message }) => {
+        {contacts.map(({ name, id, avatar, date, lastmessage }) => {
           return (
-            <li className={s.contact} key={id}>
-              <div className={s.block}>
-                <div className={s.avatarBlock}>
-                  <img className={s.avatar} src={avatar} alt={name} />
-                </div>
+            <Link key={id} to={`/chat/${id}`} style={linkStyle}>
+              <li className={s.contact}>
+                <div className={s.block}>
+                  <div className={s.avatarBlock}>
+                    <img className={s.avatar} src={avatar} alt={name} />
+                  </div>
 
-                <div className={s.textBlock}>
-                  <h3 className={s.username}>{name}</h3>
-                  <p className={s.message}>{message}</p>
+                  <div className={s.textBlock}>
+                    <h3 className={s.username}>{name}</h3>
+                    <p className={s.message}>{lastmessage.message}</p>
+                  </div>
                 </div>
-              </div>
-              <p className={s.date}>{date}</p>
-            </li>
+                <p className={s.date}>{lastmessage.date}</p>
+              </li>
+            </Link>
           );
         })}
       </ul>
