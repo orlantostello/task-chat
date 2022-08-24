@@ -1,42 +1,47 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 import InputMessage from '../InputMessage/InputMessage';
 import Message from '../Message/Message';
 import s from './ChatContainer.module.css';
-import messages from '../../utils/dateMessage';
 import { useSelector } from 'react-redux';
 
 const ChatContainer = () => {
   const [currentMs, setCurrentMs] = useState([]);
   const [currentContact, setCurrentContact] = useState([]);
-  const { chatid } = useParams();
+  const [contacts, setContacts] = useState(null);
 
-  // const dispatch = useDispatch();
+  const { chatid } = useParams();
+  const scrollRef = useRef();
+
   const getContacts = useSelector(state => state.contactsReduser.contacts);
+  const getMessages = useSelector(state => state.messagesReduser.messages);
 
   useEffect(() => {
-    function getCurrentMessage() {
-      messages.forEach(el => {
-        if (el.idcontact === +chatid) {
-          setCurrentMs(el.messages);
-          return;
-        }
-      });
-    }
-    getCurrentMessage();
-  }, [chatid]);
+    setContacts(getContacts);
+  }, [getContacts]);
+
+  useEffect(() => {
+    const message = getMessages.filter(el => el.chatid === +chatid);
+    setCurrentMs(message);
+  }, [chatid, getMessages]);
 
   useEffect(() => {
     function getCurrentContact() {
-      getContacts.forEach(el => {
+      contacts?.forEach(el => {
         if (el.id === +chatid) {
           setCurrentContact(el);
+
           return;
         }
       });
     }
+
     getCurrentContact();
-  }, [getContacts, chatid]);
+  }, [contacts, chatid]);
+
+  useEffect(() => {
+    scrollRef.current?.scrollIntoView({ behavior: 'smooth' });
+  }, [currentMs]);
 
   return (
     <div className={s.container}>
@@ -47,8 +52,8 @@ const ChatContainer = () => {
 
       <ul className={s.chatBox}>
         {currentMs.map(m => (
-          <li key={m.id}>
-            <Message message={m} />
+          <li key={m.id} ref={scrollRef}>
+            <Message message={m} avatar={currentContact.avatar} />
           </li>
         ))}
       </ul>

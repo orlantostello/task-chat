@@ -1,8 +1,10 @@
 import React from 'react';
+import moment from 'moment';
 import s from './Message.module.css';
 
-const Message = ({ message }) => {
-  const { own, text, creteDate, avatar } = message;
+const Message = ({ message, avatar }) => {
+  const { own, text, creteDate } = message;
+
   return (
     <>
       {own ? (
@@ -10,7 +12,7 @@ const Message = ({ message }) => {
           <div className={s.messageTop}>
             <p className={s.messageText}>{text}</p>
           </div>
-          <div className={s.messageTimeOwn}>{creteDate}</div>
+          <div className={s.messageTimeOwn}>{moment(creteDate).format('MM/DD/YY LT')}</div>
         </div>
       ) : (
         <div className={s.message}>
@@ -18,7 +20,7 @@ const Message = ({ message }) => {
             <img className={s.messageImg} src={avatar} alt="" />
             <div>
               <p className={s.messageText}>{text}</p>
-              <p className={s.messageTime}>{creteDate}</p>
+              <p className={s.messageTime}>{moment(creteDate).format('MM/DD/YY LT')}</p>
             </div>
           </div>
         </div>

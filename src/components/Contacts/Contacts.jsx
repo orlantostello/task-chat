@@ -1,7 +1,8 @@
-import React from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import moment from 'moment';
 import s from './Contacts.module.css';
-import contacts from '../../utils/dataContacts';
 
 const linkStyle = {
   textDecoration: 'none',
@@ -9,12 +10,31 @@ const linkStyle = {
 };
 
 const Contacts = () => {
+  const [sortContacs, setSortContacs] = useState([]);
+
+  const getContacts = useSelector(state => state.contactsReduser.contacts);
+  const filter = useSelector(state => state.contactsReduser.filter);
+
+  useEffect(() => {
+    const sort = getContacts.slice().sort((a, b) => {
+      return b?.lastmessage?.date - a?.lastmessage?.date;
+    });
+
+    setSortContacs(sort);
+  }, [getContacts]);
+
+  const getVisibleContacts = (contacts, filter) => {
+    const normalizedFilter = filter.toLowerCase().trim();
+
+    return contacts.filter(contact => contact.name.toLowerCase().includes(normalizedFilter));
+  };
+
   return (
     <div className={s.container}>
       <h2 className={s.header}>Chats</h2>
 
       <ul className={s.contacts}>
-        {contacts.map(({ name, id, avatar, date, lastmessage }) => {
+        {getVisibleContacts(sortContacs, filter)?.map(({ name, id, avatar, lastmessage }) => {
           return (
             <Link key={id} to={`/chat/${id}`} style={linkStyle}>
               <li className={s.contact}>
@@ -28,7 +48,9 @@ const Contacts = () => {
                     <p className={s.message}>{lastmessage.message}</p>
                   </div>
                 </div>
-                <p className={s.date}>{lastmessage.date}</p>
+                <p className={s.date}>
+                  {lastmessage.date ? moment(lastmessage?.date).format('MMM DD, YYYY') : ''}
+                </p>
               </li>
             </Link>
           );
