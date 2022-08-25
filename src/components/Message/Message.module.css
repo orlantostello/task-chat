@@ -1,14 +1,14 @@
 .messageOwn {
   display: flex;
   flex-direction: column;
-  margin-top: 20px;
+  margin-top: 15px;
   align-items: flex-end;
 }
 
 .message {
   display: flex;
   flex-direction: column;
-  margin-top: 20px;
+  margin-top: 15px;
 }
 
 .messageTop {
@@ -28,29 +28,65 @@
   border-radius: 20px;
   background-color: #0a213f;
   color: white;
-  max-width: 300px;
+  max-width: 100px;
 }
 
 .messageTime {
-  font-size: 12px;
-  margin-top: 10px;
+  font-size: 11px;
+  margin-top: 8px;
   margin-left: 10px;
 }
 
 .messageTimeOwn {
-  font-size: 12px;
-  margin-top: 10px;
+  font-size: 11px;
+  margin-top: 8px;
   margin-right: 10px;
 }
 
 .messageOwn {
   display: flex;
   flex-direction: column;
-  margin-top: 20px;
+  margin-top: 15px;
   align-items: flex-end;
 }
 
 .messageOwn .messageText {
   background-color: rgb(245, 241, 241);
   color: black;
+}
+
+@media screen and (max-width: 767px) {
+  .messageText {
+    max-width: 80vw;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .message {
+    margin-top: 20px;
+  }
+
+  .messageText {
+    max-width: 230px;
+  }
+
+  .messageTime {
+    font-size: 12px;
+    margin-top: 10px;
+  }
+
+  .messageTimeOwn {
+    font-size: 12px;
+    margin-top: 10px;
+  }
+
+  .messageOwn {
+    margin-top: 20px;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .messageText {
+    max-width: 350px;
+  }
 }

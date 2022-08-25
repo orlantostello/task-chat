@@ -44,3 +44,30 @@
 .input:focus + .icon {
   fill: rgb(152, 161, 245);
 }
+
+@media screen and (max-width: 767px) {
+  .inputContainer {
+    width: 100vw;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .input {
+    width: 95vw;
+    height: 30px;
+    margin-left: 10px;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .inputContainer {
+    width: calc(100% - 40px);
+
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .input {
+    width: calc(100% - 40px);
+    height: 35px;
+  }
+}

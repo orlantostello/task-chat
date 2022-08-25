@@ -1,19 +1,34 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
+import useMediaQuery from '../../hooks/useMediaQuery';
 import Contacts from '../Contacts/Contacts';
 import Header from '../Header/Header';
 import s from './Layout.module.css';
 
 const Layout = () => {
-  return (
-    <div className={s.container}>
-      <div>
-        <Header />
-        <Contacts />
-      </div>
+  const isMobile = useMediaQuery('(max-width: 767px)');
 
-      <Outlet />
-    </div>
+  return (
+    <>
+      {isMobile ? (
+        <div className={s.container}>
+          <div>
+            <Header />
+          </div>
+
+          <Outlet />
+        </div>
+      ) : (
+        <div className={s.container}>
+          <div>
+            <Header />
+            <Contacts />
+          </div>
+
+          <Outlet />
+        </div>
+      )}
+    </>
   );
 };
 

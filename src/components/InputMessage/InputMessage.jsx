@@ -1,10 +1,11 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { IoMdSend } from 'react-icons/io';
 import { v4 } from 'uuid';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { addMessage, addLastMessage } from '../../redux/messages/messagesSlice';
+import { addMessage } from '../../redux/messages/messagesSlice';
 import { addLastChatMessage } from '../../redux/contactsSlice';
+import { toast } from 'react-toastify';
 import { fetchMessage } from '../../service/messageApi';
 import s from './InputMessage.module.css';
 
@@ -12,17 +13,12 @@ const messageInputId = v4();
 
 const InputMessage = () => {
   const [msg, setMsg] = useState('');
-  const [lastMsg, setLastMsg] = useState('');
+
   const { chatid } = useParams();
 
   const dispatch = useDispatch();
 
-  const lastMessage = useSelector(state => state.messagesReduser.lastMessage);
   const getContacts = useSelector(state => state.contactsReduser.contacts);
-
-  useEffect(() => {
-    setLastMsg(lastMessage);
-  }, [lastMessage]);
 
   const handleChange = e => {
     setMsg(e.target.value);
@@ -43,7 +39,8 @@ const InputMessage = () => {
 
     if (msg !== '') {
       dispatch(addMessage(message));
-      dispatch(addLastMessage(lastMessageOwn));
+
+      dispatch(addLastChatMessage(setLastContactMessage(lastMessageOwn)));
 
       fetchMessage().then(res => {
         setTimeout(() => {
@@ -58,23 +55,28 @@ const InputMessage = () => {
 
           const lastMessage = { message: res.data.value, date: Date.now() };
 
-          dispatch(addLastMessage(lastMessage));
-        }, 5000);
+          dispatch(addLastChatMessage(setLastContactMessage(lastMessage)));
+
+          toast.success(`You've got a message!`, {
+            toastId: 'custom-id-yes',
+          });
+        }, 3000);
       });
 
       reset();
     }
   };
 
-  useEffect(() => {
+  function setLastContactMessage(message) {
     const idx = getContacts.findIndex(el => el.id === +chatid);
     const oldContact = getContacts[idx];
-    const newContact = { ...oldContact, lastmessage: lastMsg };
+
+    const newContact = { ...oldContact, lastmessage: message };
+
     const contacts = [...getContacts.slice(0, idx), newContact, ...getContacts.slice(idx + 1)];
 
-    dispatch(addLastChatMessage(contacts));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [lastMsg]);
+    return contacts;
+  }
 
   const reset = () => {
     setMsg('');

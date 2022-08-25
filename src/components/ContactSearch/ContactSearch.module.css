@@ -4,7 +4,7 @@
   margin-top: 20px;
 }
 .input {
-  width: calc(100% - 40px);
+  width: 90vw;
   height: 25px;
   padding-left: 30px;
   padding-right: 10px;
@@ -30,4 +30,10 @@
 
 .input:focus + .icon {
   fill: rgb(152, 161, 245);
+}
+
+@media screen and (min-width: 768px) {
+  .input {
+    width: calc(100% - 40px);
+  }
 }

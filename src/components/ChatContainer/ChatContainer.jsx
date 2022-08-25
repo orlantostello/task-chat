@@ -1,9 +1,15 @@
 import { useEffect, useState, useRef } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import InputMessage from '../InputMessage/InputMessage';
 import Message from '../Message/Message';
 import s from './ChatContainer.module.css';
 import { useSelector } from 'react-redux';
+import { ImArrowLeft } from 'react-icons/im';
+
+const linkStyle = {
+  textDecoration: 'none',
+  color: '#000',
+};
 
 const ChatContainer = () => {
   const [currentMs, setCurrentMs] = useState([]);
@@ -46,8 +52,14 @@ const ChatContainer = () => {
   return (
     <div className={s.container}>
       <div className={s.header}>
-        <img className={s.contactImg} src={currentContact.avatar} alt={currentContact.name} />
-        <p className={s.name}>{currentContact.name}</p>
+        <Link to={'/'} style={linkStyle}>
+          <ImArrowLeft className={s.back} />
+        </Link>
+
+        <div className={s.contact}>
+          <img className={s.contactImg} src={currentContact.avatar} alt={currentContact.name} />
+          <p className={s.name}>{currentContact.name}</p>
+        </div>
       </div>
 
       <ul className={s.chatBox}>
