@@ -1,0 +1,33 @@
+.login {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+  background: #ffff;
+}
+
+.loginBtn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  border-radius: 20px;
+  padding: 10px;
+  border: none;
+  background-color: #e0e0e0;
+  transition: all 0.2s;
+
+  cursor: pointer;
+}
+
+.loginText {
+  font-size: 24px;
+  color: #000;
+}
+
+.loginIcon {
+  width: 40px;
+  height: 40px;
+}

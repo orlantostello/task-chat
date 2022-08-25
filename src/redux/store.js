@@ -3,6 +3,7 @@ import { persistStore, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import contactsReduser from './contactsSlice';
 import messagesReduser from './messages/messagesSlice';
+import userReduser from './userSlice';
 
 const persistConfig = {
   key: 'users',
@@ -12,6 +13,7 @@ const persistConfig = {
 const rootReducer = combineReducers({
   contactsReduser,
   messagesReduser,
+  userReduser,
 });
 
 export const store = configureStore({

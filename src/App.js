@@ -9,6 +9,9 @@ import ChatContainer from './components/ChatContainer/ChatContainer';
 import 'react-toastify/dist/ReactToastify.css';
 import './App.css';
 import Contacts from './components/Contacts/Contacts';
+import Login from './components/Login/Login';
+import PrivateRoute from './components/PrivateRoute';
+import Notfoundpage from './pages/Notfoundpage';
 
 function App() {
   const isMobile = useMediaQuery('(max-width: 767px)');
@@ -19,17 +22,36 @@ function App() {
         {isMobile ? (
           <Routes>
             <Route path="/" element={<Layout />}>
-              <Route index element={<Contacts />} />
+              <Route
+                path="/"
+                element={
+                  <PrivateRoute>
+                    <Contacts />
+                  </PrivateRoute>
+                }
+              />
             </Route>
             <Route path="chat/:chatid" element={<ChatContainer />}></Route>
+            <Route path="login" element={<Login />} />
+            <Route path="*" element={<Notfoundpage />} />
           </Routes>
         ) : (
           <Routes>
             <Route path="/" element={<Layout />}>
-              <Route index element={<Home />} />
+              <Route
+                path="/"
+                element={
+                  <PrivateRoute>
+                    <Home />
+                  </PrivateRoute>
+                }
+              />
+
               <Route path="chat" element={<Chat />} />
               <Route path="chat/:chatid" element={<ChatContainer />} />
             </Route>
+            <Route path="login" element={<Login />} />
+            <Route path="*" element={<Notfoundpage />} />
           </Routes>
         )}
       </BrowserRouter>

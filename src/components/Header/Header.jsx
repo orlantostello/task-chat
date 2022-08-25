@@ -1,7 +1,9 @@
-import React from 'react';
+import { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { IoLogoFreebsdDevil } from 'react-icons/io';
+import { useAuthState } from 'react-firebase-hooks/auth';
 import ContactSearch from '../ContactSearch/ContactSearch';
+import { Context } from '../../index';
 import s from './Header.module.css';
 
 const linkStyle = {
@@ -10,11 +12,21 @@ const linkStyle = {
 };
 
 const Header = () => {
+  const { auth } = useContext(Context);
+  const [user] = useAuthState(auth);
+
   return (
     <div className={s.container}>
-      <div>
+      <div className={s.userContainer}>
         <Link to={'/'} style={linkStyle}>
-          <IoLogoFreebsdDevil className={s.icon} />
+          {user ? (
+            <div className={s.user}>
+              <img src={user.photoURL} alt="" className={s.icon} />
+              <p className={s.name}>{user.displayName}</p>
+            </div>
+          ) : (
+            <IoLogoFreebsdDevil className={s.icon} />
+          )}
         </Link>
       </div>
 

@@ -60,7 +60,7 @@ const InputMessage = () => {
           toast.success(`You've got a message!`, {
             toastId: 'custom-id-yes',
           });
-        }, 3000);
+        }, 10000);
       });
 
       reset();
