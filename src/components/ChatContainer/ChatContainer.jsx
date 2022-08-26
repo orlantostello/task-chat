@@ -71,7 +71,7 @@ const ChatContainer = () => {
       </ul>
 
       <div className={s.inputContainer}>
-        <InputMessage />
+        <InputMessage currentContact={currentContact} />
       </div>
     </div>
   );

@@ -11,7 +11,7 @@ import s from './InputMessage.module.css';
 
 const messageInputId = v4();
 
-const InputMessage = () => {
+const InputMessage = ({ currentContact }) => {
   const [msg, setMsg] = useState('');
 
   const { chatid } = useParams();
@@ -57,7 +57,7 @@ const InputMessage = () => {
 
           dispatch(addLastChatMessage(setLastContactMessage(lastMessage)));
 
-          toast.success(`You've got a message!`, {
+          toast.success(`You received a message from ${currentContact.name}`, {
             toastId: 'custom-id-yes',
           });
         }, 10000);
